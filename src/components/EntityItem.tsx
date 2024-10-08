@@ -11,24 +11,41 @@ interface EntityItemProps {
 }
 
 const EntityItem: React.FC<EntityItemProps> = ({ entity, onDelete, onEdit, onView }) => {
+  const renderEntityDetails = () => {
+    switch (entity.type) {
+      case 'User':
+        return (
+          <>
+            <td>{entity.firstName}</td>
+            <td>{entity.lastName}</td>
+            <td>{entity.password}</td>
+          </>
+        );
+      case 'Product':
+        return (
+          <>
+            <td>{entity.name}</td>
+            <td>{entity.description}</td>
+            <td>{`${entity.price} TL`}</td>
+          </>
+        );
+      case 'Category':
+        return (
+          <>
+            <td>{entity.name}</td>
+            <td>{entity.description}</td>
+            <td>-</td>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <tr>
       <td>{entity.type}</td>
-      <td>
-        {entity.type === 'User' && `${entity.firstName}`}
-        {entity.type === 'Product' && `${entity.name}`}
-        {entity.type === 'Category' && `${entity.name}`}
-      </td>
-      <td>
-        {entity.type === 'User' && `${entity.lastName}`}
-        {entity.type === 'Product' && `${entity.description}`}
-        {entity.type === 'Category' && `${entity.description}`}
-      </td>
-      <td>
-        {entity.type === 'User' && `${entity.password}`}
-        {entity.type === 'Product' && `${entity.price} TL`}
-        {entity.type === 'Category' && `-`}
-      </td>
+      {renderEntityDetails()}
       <td className="text-center">
         <Button
           variant="info"
