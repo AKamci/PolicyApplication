@@ -12,7 +12,6 @@ interface EntityListProps {
 const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
-
   const [showModal, setShowModal] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState<Entity | null>(null);
 
@@ -48,19 +47,72 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
     setCurrentPage(pageNumber);
   };
 
-  // Sayfalama için sayfa numaralarını oluştur
-  const paginationItems = [];
-  for (let number = 1; number <= totalPages; number++) {
-    paginationItems.push(
-      <Pagination.Item
-        key={number}
-        active={number === currentPage}
-        onClick={() => handleChangePage(number)}
-      >
-        {number}
-      </Pagination.Item>
+  const renderPagination = () => (
+    <Pagination className="justify-content-center">
+      <Pagination.Prev
+        onClick={() => currentPage > 1 && handleChangePage(currentPage - 1)}
+        disabled={currentPage === 1}
+      />
+      {Array.from({ length: totalPages }, (_, index) => (
+        <Pagination.Item
+          key={index + 1}
+          active={index + 1 === currentPage}
+          onClick={() => handleChangePage(index + 1)}
+        >
+          {index + 1}
+        </Pagination.Item>
+      ))}
+      <Pagination.Next
+        onClick={() => currentPage < totalPages && handleChangePage(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      />
+    </Pagination>
+  );
+
+  const renderModal = () => (
+    <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Entity Details</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {selectedEntity ? renderEntityDetails(selectedEntity) : <p>No entity selected.</p>}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleCloseModal}>
+          Kapat
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
+  const renderEntityDetails = (entity: Entity) => {
+    return (
+      <div>
+        <p><strong>Tür:</strong> {entity.type}</p>
+        <p><strong>ID:</strong> {entity.id}</p>
+        {entity.type === 'User' && (
+          <>
+            <p><strong>İsim:</strong> {entity.firstName}</p>
+            <p><strong>Soyisim:</strong> {entity.lastName}</p>
+            <p><strong>Şifre:</strong> {entity.password}</p>
+          </>
+        )}
+        {entity.type === 'Product' && (
+          <>
+            <p><strong>Ürün Adı:</strong> {entity.name}</p>
+            <p><strong>Açıklama:</strong> {entity.description}</p>
+            <p><strong>Fiyat:</strong> {entity.price} TL</p>
+          </>
+        )}
+        {entity.type === 'Category' && (
+          <>
+            <p><strong>Kategori Adı:</strong> {entity.name}</p>
+            <p><strong>Açıklama:</strong> {entity.description}</p>
+          </>
+        )}
+      </div>
     );
-  }
+  };
 
   return (
     <div>
@@ -91,65 +143,10 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
               ))}
             </tbody>
           </Table>
-          {totalPages > 1 && (
-            <Pagination className="justify-content-center">
-              <Pagination.Prev
-                onClick={() => currentPage > 1 && handleChangePage(currentPage - 1)}
-                disabled={currentPage === 1}
-              />
-              {paginationItems}
-              <Pagination.Next
-                onClick={() => currentPage < totalPages && handleChangePage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              />
-            </Pagination>
-          )}
+          {totalPages > 1 && renderPagination()}
         </>
       )}
-
-      {/* Modal */}
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Entity Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedEntity ? (
-            <div>
-              <p><strong>Tür:</strong> {selectedEntity.type}</p>
-              {selectedEntity.type === 'User' && (
-                <>
-                  <p><strong>ID:</strong> {selectedEntity.id}</p>
-                  <p><strong>İsim:</strong> {selectedEntity.firstName}</p>
-                  <p><strong>Soyisim:</strong> {selectedEntity.lastName}</p>
-                  <p><strong>Şifre:</strong> {selectedEntity.password}</p>
-                </>
-              )}
-              {selectedEntity.type === 'Product' && (
-                <>
-                  <p><strong>ID:</strong> {selectedEntity.id}</p>
-                  <p><strong>Ürün Adı:</strong> {selectedEntity.name}</p>
-                  <p><strong>Açıklama:</strong> {selectedEntity.description}</p>
-                  <p><strong>Fiyat:</strong> {selectedEntity.price} TL</p>
-                </>
-              )}
-              {selectedEntity.type === 'Category' && (
-                <>
-                  <p><strong>ID:</strong> {selectedEntity.id}</p>
-                  <p><strong>Kategori Adı:</strong> {selectedEntity.name}</p>
-                  <p><strong>Açıklama:</strong> {selectedEntity.description}</p>
-                </>
-              )}
-            </div>
-          ) : (
-            <p>No entity selected.</p>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Kapat
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {renderModal()}
     </div>
   );
 };
