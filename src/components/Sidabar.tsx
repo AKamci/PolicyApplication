@@ -16,7 +16,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
 
   const handleFetchOptionClick = (type: EntityType, queryId: number) => {
     onFetchAll(type, queryId); // API çağrısını yap
-    setSelectedFetchOption(`${type} Getir (${queryId})`); // Seçilen fetch seçeneğini güncelle
+    setSelectedFetchOption(`${type} Fetch Option (${queryId})`); // Seçilen fetch seçeneğini güncelle
   };
 
   return (
@@ -94,40 +94,40 @@ const renderFetchOptions = (
 ) => {
   const fetchOptions: { [key in EntityType]: string[] } = {
     User: [
-      "Kullanıcıları Getir (1)",
-      "Kullanıcıları Getir (2)",
-      "Kullanıcıları Getir (3)",
-      "Kullanıcıları Getir (4)",
-      "Kullanıcıları Getir (5)",
-      "Kullanıcıları Getir (6)",
-      "Kullanıcıları Getir (7)",
-      "Kullanıcıları Getir (8)",
-      "Kullanıcıları Getir (9)",
-      "Kullanıcıları Getir (10)",
+      "Kullanıcıları Getir (1) - Tüm kullanıcılar",
+      "Kullanıcıların Köpeklerini Getir (2)",
+      "Kullanıcıların Yaşlarını Getir (3)",
+      "Kullanıcıların Email'lerini Getir (4)",
+      "Kullanıcıların Şehirlerini Getir (5)",
+      "Kullanıcıların Hakkında Bilgilerini Getir (6)",
+      "Kullanıcıların Favori Ürünlerini Getir (7)",
+      "Kullanıcıların Arkadaşlarını Getir (8)",
+      "Kullanıcıların En Son Aktivite Zamanını Getir (9)",
+      "Kullanıcıların Profil Resimlerini Getir (10)",
     ],
     Product: [
-      "Ürünleri Getir (1)",
-      "Ürünleri Getir (2)",
-      "Ürünleri Getir (3)",
-      "Ürünleri Getir (4)",
-      "Ürünleri Getir (5)",
-      "Ürünleri Getir (6)",
-      "Ürünleri Getir (7)",
-      "Ürünleri Getir (8)",
-      "Ürünleri Getir (9)",
-      "Ürünleri Getir (10)",
+      "Ürünleri Getir (1) - Tüm ürünler",
+      "Yeni Ürünleri Getir (2)",
+      "İndirimli Ürünleri Getir (3)",
+      "En Çok Satan Ürünleri Getir (4)",
+      "Yüksek Puanlı Ürünleri Getir (5)",
+      "Stokta Olan Ürünleri Getir (6)",
+      "Önerilen Ürünleri Getir (7)",
+      "Kategorilere Göre Ürünleri Getir (8)",
+      "Son Eklenen Ürünleri Getir (9)",
+      "Düşük Fiyatlı Ürünleri Getir (10)",
     ],
     Category: [
-      "Kategorileri Getir (1)",
-      "Kategorileri Getir (2)",
-      "Kategorileri Getir (3)",
-      "Kategorileri Getir (4)",
-      "Kategorileri Getir (5)",
-      "Kategorileri Getir (6)",
-      "Kategorileri Getir (7)",
-      "Kategorileri Getir (8)",
-      "Kategorileri Getir (9)",
-      "Kategorileri Getir (10)",
+      "Kategorileri Getir (1) - Tüm kategoriler",
+      "Alt Kategorileri Getir (2)",
+      "Popüler Kategorileri Getir (3)",
+      "Yeni Kategorileri Getir (4)",
+      "Kategorilere Göre Ürünleri Getir (5)",
+      "Kategorilerin Altında Olan Ürünleri Getir (6)",
+      "Kategorilerin İlgili Ürünlerini Getir (7)",
+      "Kategorilere Göre Kullanıcıları Getir (8)",
+      "Kategorilere Göre Satışları Getir (9)",
+      "Kategorilere Göre İndirimleri Getir (10)",
     ],
   };
 
