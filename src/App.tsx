@@ -1,7 +1,7 @@
 // src/App.tsx
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Sidebar from './components/Sidabar';
+import Sidebar from './components/Sidebar'; // Hatalı isim düzeltildi
 import MainContent from './components/MainContent';
 import { Entity, EntityType } from './types/types';
 import { fetchEntities } from './EntityService/entityService';
@@ -14,6 +14,7 @@ const App: React.FC = () => {
     console.log(`Fetching all entities of type: ${type} from the database...`);
     
     try {
+      // Burada fetchEntities yerine, uygun servis fonksiyonlarını çağırın
       const fetchedEntities = await fetchEntities(type);
       setEntities(prevEntities => [...prevEntities, ...fetchedEntities]);
       alert(`${type} türündeki tüm entity'ler getirildi (simülasyon).`);
@@ -30,7 +31,6 @@ const App: React.FC = () => {
           <Sidebar
             selectedEntityType={selectedEntityType}
             setSelectedEntityType={setSelectedEntityType}
-            onFetchAll={handleFetchAll}
           />
         </Col>
         <Col md={9} className="p-4">
@@ -38,7 +38,7 @@ const App: React.FC = () => {
             selectedEntityType={selectedEntityType}
             entities={entities}
             setEntities={setEntities}
-            onFetchAll={handleFetchAll}
+            onFetchAll={handleFetchAll} // Bu satırı ekleyin
           />
         </Col>
       </Row>

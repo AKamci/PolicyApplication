@@ -16,6 +16,8 @@ export const fetchUsers = async (queryId: number): Promise<Entity[]> => {
       break;
     // Diğer durumlar...
     default:
+        console.log("BURAYA BİR ŞEY BASILDI")   
+
       break;
   }
 
