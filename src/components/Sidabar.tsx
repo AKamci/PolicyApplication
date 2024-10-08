@@ -1,22 +1,40 @@
-// src/components/Sidebar.tsx
 import React, { useState } from 'react';
 import { ListGroup, Button, Collapse } from 'react-bootstrap';
 import { EntityType } from '../types/types';
+import { fetchUsers } from '../EntityService/UserService';
+import { fetchProducts } from '../EntityService/ProductService';
+import { fetchCategories } from '../EntityService/CategoryService';
 
 interface SidebarProps {
   selectedEntityType: EntityType | null;
   setSelectedEntityType: (type: EntityType | null) => void;
-  onFetchAll: (type: EntityType, queryId: number) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntityType, onFetchAll }) => {
+const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntityType }) => {
   const entityTypes: EntityType[] = ['User', 'Product', 'Category'];
   const [open, setOpen] = useState(false);
-  const [selectedFetchOption, setSelectedFetchOption] = useState<string | null>(null); // Fetch seçeneğini tutan durum
+  const [selectedFetchOption, setSelectedFetchOption] = useState<string | null>(null);
 
-  const handleFetchOptionClick = (type: EntityType, queryId: number) => {
-    onFetchAll(type, queryId); // API çağrısını yap
-    setSelectedFetchOption(`${type} Fetch Option (${queryId})`); // Seçilen fetch seçeneğini güncelle
+  const handleFetchOptionClick = async (type: EntityType, queryId: number) => {
+    let fetchedData;
+    switch (type) {
+      case 'User':
+        fetchedData = await fetchUsers(queryId);
+        break;
+      case 'Product':
+        fetchedData = await fetchProducts(queryId);
+        break;
+      case 'Category':
+        fetchedData = await fetchCategories(queryId);
+        break;
+      default:
+        break;
+    }
+
+    // API'den çekilen veriyi işleme (örneğin, bir state'e kaydetme)
+    console.log(fetchedData); 
+
+    setSelectedFetchOption(`${type} Fetch Option (${queryId})`);
   };
 
   return (
@@ -25,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
         {renderEntityList(entityTypes, selectedEntityType, setSelectedEntityType)}
         {selectedEntityType && renderFetchButton(open, setOpen, selectedEntityType, handleFetchOptionClick)}
       </ListGroup>
-      {selectedFetchOption && ( // Seçilen fetch seçeneğini ekrana yazdır
+      {selectedFetchOption && (
         <div className="mt-3">
           <h5>{selectedFetchOption}</h5>
         </div>
