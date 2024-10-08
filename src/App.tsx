@@ -1,9 +1,9 @@
 // src/App.tsx
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Sidebar from './Sidabar';
-import MainContent from './MainContent';
-import { Entity, EntityType } from './types';
+import Sidebar from './components/Sidabar';
+import MainContent from './components/MainContent';
+import { Entity, EntityType } from './types/types';
 
 const App: React.FC = () => {
   const [selectedEntityType, setSelectedEntityType] = useState<EntityType | null>(null);

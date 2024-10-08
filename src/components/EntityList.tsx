@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import EntityItem from './EntityItem';
 import { Table, Pagination, Modal, Button } from 'react-bootstrap';
-import { Entity } from './types';
+import { Entity } from '../types/types';
 
 interface EntityListProps {
   entities: Entity[];

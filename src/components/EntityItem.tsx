@@ -1,7 +1,7 @@
 // src/components/EntityItem.tsx
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { Entity } from './types';
+import { Entity } from '../types/types';
 
 interface EntityItemProps {
   entity: Entity;

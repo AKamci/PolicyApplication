@@ -1,7 +1,7 @@
 // src/components/Sidebar.tsx
 import React, { useState } from 'react';
 import { ListGroup, Button, Collapse } from 'react-bootstrap';
-import { EntityType } from './types';
+import { EntityType } from '../types/types';
 
 interface SidebarProps {
   selectedEntityType: EntityType | null;

@@ -1,18 +1,20 @@
-// src/CreateEntity.tsx
+// src/components/CreateEntityForm.tsx
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { Entity, EntityType, User, Product, Category } from './types';
+import { Entity, EntityType, User, Product, Category } from '../types/types';
 
-interface CreateEntityProps {
+interface CreateEntityFormProps {
+  entityType: EntityType;
   onCreate: (entity: Entity) => void;
 }
 
-const CreateEntity: React.FC<CreateEntityProps> = ({ onCreate }) => {
+const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreate }) => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    resetForm();
+  };
   const handleShow = () => setShow(true);
-
-  const [entityType, setEntityType] = useState<EntityType>('User');
 
   // Form alanları için state
   const [userData, setUserData] = useState<{ firstName: string; lastName: string; password: string }>({
@@ -88,39 +90,28 @@ const CreateEntity: React.FC<CreateEntityProps> = ({ onCreate }) => {
     }
 
     onCreate(newEntity);
-    // Formu temizle
-    setEntityType('User');
+    resetForm();
+    handleClose();
+  };
+
+  const resetForm = () => {
     setUserData({ firstName: '', lastName: '', password: '' });
     setProductData({ name: '', description: '', price: 0 });
     setCategoryData({ name: '', description: '' });
-    handleClose();
   };
 
   return (
     <>
       <Button variant="primary" onClick={handleShow} className="mb-4">
-        Create Entity
+        {`Create ${entityType}`}
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Yeni Entity Oluştur</Modal.Title>
+            <Modal.Title>{`Yeni ${entityType} Oluştur`}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form.Group controlId="formEntityType" className="mb-3">
-              <Form.Label>Entity Türü</Form.Label>
-              <Form.Select
-                value={entityType}
-                onChange={(e) => setEntityType(e.target.value as EntityType)}
-                required
-              >
-                <option value="User">User</option>
-                <option value="Product">Product</option>
-                <option value="Category">Category</option>
-              </Form.Select>
-            </Form.Group>
-
             {entityType === 'User' && (
               <>
                 <Form.Group controlId="formFirstName" className="mb-3">
@@ -237,4 +228,4 @@ const CreateEntity: React.FC<CreateEntityProps> = ({ onCreate }) => {
   );
 };
 
-export default CreateEntity;
+export default CreateEntityForm;
