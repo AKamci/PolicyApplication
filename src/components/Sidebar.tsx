@@ -95,7 +95,7 @@ const renderFetchButton = (
         aria-expanded={open}
         className="w-100"
       >
-        Veritabanından Hepsini Getir
+        Veritabanı İşlemleri
       </Button>
       <Collapse in={open}>
         <div id="fetch-options" className="mt-2">

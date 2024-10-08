@@ -1,11 +1,12 @@
 // src/index.tsx
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS'i ekleyin
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import './App.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement); // root'u tanımla
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement); 
 root.render(
   <React.StrictMode>
     <App />
