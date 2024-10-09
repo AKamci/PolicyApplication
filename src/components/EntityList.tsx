@@ -91,24 +91,18 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
       <div>
         <p><strong>Tür:</strong> {entity.type}</p>
         <p><strong>ID:</strong> {entity.id}</p>
-        {entity.type === 'User' && (
+        {entity.type === 'Customer' && (
           <>
             <p><strong>İsim:</strong> {entity.firstName}</p>
             <p><strong>Soyisim:</strong> {entity.lastName}</p>
             <p><strong>Şifre:</strong> {entity.password}</p>
           </>
         )}
-        {entity.type === 'Product' && (
+        {entity.type === 'CarPolicy' && (
           <>
             <p><strong>Ürün Adı:</strong> {entity.name}</p>
             <p><strong>Açıklama:</strong> {entity.description}</p>
             <p><strong>Fiyat:</strong> {entity.price} TL</p>
-          </>
-        )}
-        {entity.type === 'Category' && (
-          <>
-            <p><strong>Kategori Adı:</strong> {entity.name}</p>
-            <p><strong>Açıklama:</strong> {entity.description}</p>
           </>
         )}
       </div>

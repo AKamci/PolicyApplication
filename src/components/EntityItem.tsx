@@ -14,7 +14,7 @@ const EntityItem: React.FC<EntityItemProps> = ({ entity, onDelete, onEdit, onVie
   console.log("EntityItem is rendered.")
   const renderEntityDetails = () => {
     switch (entity.type) {
-      case 'User':
+      case 'Customer':
         return (
           <>
             <td>{entity.firstName}</td>
@@ -22,7 +22,7 @@ const EntityItem: React.FC<EntityItemProps> = ({ entity, onDelete, onEdit, onVie
             <td>{entity.password}</td>
           </>
         );
-      case 'Product':
+      case 'CarPolicy':
         return (
           <>
             <td>{entity.name}</td>
@@ -30,14 +30,7 @@ const EntityItem: React.FC<EntityItemProps> = ({ entity, onDelete, onEdit, onVie
             <td>{`${entity.price} TL`}</td>
           </>
         );
-      case 'Category':
-        return (
-          <>
-            <td>{entity.name}</td>
-            <td>{entity.description}</td>
-            <td>-</td>
-          </>
-        );
+        
       default:
         return null;
     }

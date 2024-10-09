@@ -1,6 +1,6 @@
 // src/types/types.ts
 
-export type EntityType = 'User' | 'Product' | 'Category';
+export type EntityType = 'Customer' | 'CarPolicy';
 
 
 export interface BaseEntity {
@@ -8,24 +8,19 @@ export interface BaseEntity {
   type: EntityType;
 }
 
-export interface User extends BaseEntity {
-  type: 'User';
+export interface Customer extends BaseEntity {
+  type: 'Customer';
   firstName: string;
   lastName: string;
   password: string;
 }
 
-export interface Product extends BaseEntity {
-  type: 'Product';
+export interface CarPolicy extends BaseEntity {
+  type: 'CarPolicy';
   name: string;
   description: string;
   price: number;
 }
 
-export interface Category extends BaseEntity {
-  type: 'Category';
-  name: string;
-  description: string;
-}
 
-export type Entity = User | Product | Category;
+export type Entity = Customer | CarPolicy;

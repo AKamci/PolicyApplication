@@ -19,14 +19,11 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
     let fetchedData;
 
     switch (type) {
-      case 'User':
+      case 'Customer':
         fetchedData = await getUserData(queryId);
         break;
-      case 'Product':
+      case 'CarPolicy':
         fetchedData = await getProductData(queryId);
-        break;
-      case 'Category':
-        fetchedData = await getCategoryData(queryId);
         break;
       default:
         break;
@@ -43,14 +40,11 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
     let fetchOptions: string[] = [];
 
     switch (selectedEntityType) {
-      case 'User':
+      case 'Customer':
         fetchOptions = userFetchOptions;
         break;
-      case 'Product':
+      case 'CarPolicy':
         fetchOptions = productFetchOptions;
-        break;
-      case 'Category':
-        fetchOptions = categoryFetchOptions;
         break;
       default:
         break;
@@ -81,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
         >
           Tüm Entity'ler
         </ListGroup.Item>
-        {['User', 'Product', 'Category'].map((type) => (
+        {['Customer', 'CarPolicy'].map((type) => (
           <ListGroup.Item
             key={type}
             action

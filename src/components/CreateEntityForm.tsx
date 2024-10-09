@@ -32,31 +32,22 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
     let newEntity: Entity;
 
     switch (entityType) {
-      case 'User':
+      case 'Customer':
         const { firstName, lastName, password } = formData;
         if (!firstName || !lastName || !password) {
           alert('Lütfen tüm alanları doldurun.');
           return;
         }
-        newEntity = { id: Date.now(), type: 'User', firstName, lastName, password };
+        newEntity = { id: Date.now(), type: 'Customer', firstName, lastName, password };
         break;
 
-      case 'Product':
+      case 'CarPolicy':
         const { name, description, price } = formData;
         if (!name || !description || price <= 0) {
           alert('Lütfen tüm alanları doğru doldurun.');
           return;
         }
-        newEntity = { id: Date.now(), type: 'Product', name, description, price };
-        break;
-
-      case 'Category':
-        const { catName, catDescription } = formData;
-        if (!catName || !catDescription) {
-          alert('Lütfen tüm alanları doldurun.');
-          return;
-        }
-        newEntity = { id: Date.now(), type: 'Category', name: catName, description: catDescription };
+        newEntity = { id: Date.now(), type: 'CarPolicy', name, description, price };
         break;
 
       default:
@@ -75,12 +66,10 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
 
   const renderFormFields = () => {
     switch (entityType) {
-      case 'User':
+      case 'Customer':
         return <UserFormFields formData={formData} onInputChange={handleInputChange} />;
-      case 'Product':
+      case 'CarPolicy':
         return <ProductFormFields formData={formData} onInputChange={handleInputChange} />;
-      case 'Category':
-        return <CategoryFormFields formData={formData} onInputChange={handleInputChange} />;
       default:
         return null;
     }
