@@ -1,7 +1,7 @@
 // src/App.tsx
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Sidebar from './components/Sidebar'; // Hatalı isim düzeltildi
+import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import { Entity, EntityType } from './types/types';
 
