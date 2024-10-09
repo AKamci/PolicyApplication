@@ -2,6 +2,7 @@
 
 export type EntityType = 'User' | 'Product' | 'Category';
 
+
 export interface BaseEntity {
   id: number;
   type: EntityType;

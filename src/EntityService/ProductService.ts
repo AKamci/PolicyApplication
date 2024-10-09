@@ -1,5 +1,6 @@
 // src/services/productService.ts
 import { Entity } from '../types/types';
+import { promptProductForRequest } from '../Prompts/ProductPrompt';
 
 export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
   console.log("ProductService is rendered.")
@@ -10,6 +11,7 @@ export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
       fetchedProducts = [ /* Tüm ürünler verisi */ ];
       break;
     case 2:
+      const categoryDetails = await promptProductForRequest();
       fetchedProducts = [ /* Yeni ürünler */ ];
       break;
     case 3:

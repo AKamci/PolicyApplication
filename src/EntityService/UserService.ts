@@ -1,5 +1,7 @@
 // src/services/userService.ts
 import { Entity } from '../types/types';
+import { promptUserForRequest } from '../Prompts/UserPrompt';
+
 
 export const fetchUsers = async (queryId: number): Promise<Entity[]> => {
   console.log("UserService is rendered.")
@@ -10,6 +12,7 @@ export const fetchUsers = async (queryId: number): Promise<Entity[]> => {
       fetchedUsers = [ /* Tüm kullanıcılar verisi */ ];
       break;
     case 2:
+      const categoryDetails = await promptUserForRequest();
       fetchedUsers = [ /* Kullanıcıların köpekleri */ ];
       break;
     case 3:
