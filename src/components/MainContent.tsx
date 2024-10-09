@@ -13,6 +13,7 @@ interface MainContentProps {
 }
 
 const MainContent: React.FC<MainContentProps> = ({ selectedEntityType, entities, setEntities, onFetchAll }) => {
+  console.log("MainContent is rendered.")
   return (
     <div>
       {selectedEntityType && (

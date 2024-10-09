@@ -11,6 +11,7 @@ interface CategoryFormFieldsProps {
 }
 
 const CategoryFormFields: React.FC<CategoryFormFieldsProps> = ({ formData, onInputChange }) => (
+  
   <>
     <Form.Group controlId="formCategoryName" className="mb-3">
       <Form.Label>Kategori Adı</Form.Label>

@@ -12,6 +12,7 @@ interface CreateEntityFormProps {
 }
 
 const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreate }) => {
+  console.log("CreateEntityForm is rendered.")
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);

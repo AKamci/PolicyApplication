@@ -7,6 +7,7 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
+  console.log("UserForm is rendered.")
   const [userData, setUserData] = useState({ firstName: '', lastName: '', password: '' });
 
   const handleSubmit = (e: React.FormEvent) => {

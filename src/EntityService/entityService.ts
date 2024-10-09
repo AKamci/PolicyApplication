@@ -3,6 +3,7 @@ import { Entity, EntityType } from '../types/types';
 
 // Genel verileri çekme fonksiyonu
 export const fetchEntities = async (type: EntityType): Promise<Entity[]> => {
+  console.log("entityService is rendered.")
   let fetchedEntities: Entity[] = [];
 
   switch (type) {

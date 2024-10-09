@@ -11,6 +11,7 @@ interface EntityItemProps {
 }
 
 const EntityItem: React.FC<EntityItemProps> = ({ entity, onDelete, onEdit, onView }) => {
+  console.log("EntityItem is rendered.")
   const renderEntityDetails = () => {
     switch (entity.type) {
       case 'User':

@@ -35,7 +35,7 @@ const CreateEntity: React.FC<CreateEntityProps> = ({ onCreate }) => {
         return null;
     }
   };
-
+  console.log("CreateEntity is rendered.")
   return (
     <>
       <Button variant="primary" onClick={handleShow} className="mb-4">

@@ -7,6 +7,7 @@ interface CategoryFormProps {
 }
 
 const CategoryForm: React.FC<CategoryFormProps> = ({ onSubmit }) => {
+  console.log("CategoryForm is rendered.")
   const [categoryData, setCategoryData] = useState({ name: '', description: '' });
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -7,6 +7,7 @@ interface ProductFormProps {
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
+  console.log("ProductForm is rendered.")
   const [productData, setProductData] = useState({ name: '', description: '', price: 0 });
 
   const handleSubmit = (e: React.FormEvent) => {

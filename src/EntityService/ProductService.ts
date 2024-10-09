@@ -2,6 +2,7 @@
 import { Entity } from '../types/types';
 
 export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
+  console.log("ProductService is rendered.")
   let fetchedProducts: Entity[] = [];
 
   switch (queryId) {

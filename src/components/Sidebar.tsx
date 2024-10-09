@@ -11,6 +11,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntityType }) => {
+  console.log("Sidebar is rendered.")
   const entityTypes: EntityType[] = ['User', 'Product', 'Category'];
   const [open, setOpen] = useState(false);
   const [selectedFetchOption, setSelectedFetchOption] = useState<string | null>(null);

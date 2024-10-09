@@ -2,6 +2,7 @@
 import { Entity } from '../types/types';
 
 export const fetchUsers = async (queryId: number): Promise<Entity[]> => {
+  console.log("UserService is rendered.")
   let fetchedUsers: Entity[] = [];
 
   switch (queryId) {

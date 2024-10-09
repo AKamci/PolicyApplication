@@ -10,6 +10,7 @@ interface EntityListProps {
 }
 
 const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
+  console.log("EntityList is rendered.")
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const [showModal, setShowModal] = useState(false);
