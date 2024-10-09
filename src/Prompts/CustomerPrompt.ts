@@ -1,14 +1,23 @@
-// src/utils/promptUser.ts
-export const promptUserForRequest = async (): Promise<{ name: string; description: string }> => {
-    console.log("UserPrompt is rendered")
-    const name = prompt("Lütfen kategori adını girin:");
-    const description = prompt("Lütfen kategori açıklamasını girin:");
-  
-    if (!name || !description) {
-      alert("Lütfen tüm alanları doldurun.");
-      return promptUserForRequest(); // Geçersiz giriş durumunda tekrar sor
-    }
-  
-    return { name, description }; // JSON formatında döndür
+// src/Prompts/CustomerPrompt.ts
+
+import { CreateCustomer } from '../types/TypesForCreate';
+
+export const createCustomerEntity = (data: any): CreateCustomer | null => {
+  const { name: customerName, address, phone, email, password, age, gender } = data;
+
+  if (!customerName || !address || !phone || !email || !password || age <= 18 || !gender) {
+    alert('Lütfen tüm alanları doldurun.');
+    return null; // Hatalı giriş durumunda null döner
+  }
+
+  return {
+    type: 'CreateCustomer',
+    name: customerName,
+    address,
+    phone,
+    email,
+    password,
+    age,
+    gender,
   };
-  
+};

@@ -1,18 +1,19 @@
 // src/components/CreateEntityForm.tsx
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { Entity, EntityType } from '../types/Types';
+import {createCustomer} from '../EntityService/CustomerService';
+import {createCarPolicy} from '../EntityService/CarPolicyService';
 import UserFormFields from '../FormFields/CustomerFormFields';
-import ProductFormFields from '../FormFields/CarPolicyFormFields';
-import { createCustomer } from '../EntityService/CustomerService';
+import CarPolicyFormFields from '../FormFields/CarPolicyFormFields';
+import { CreateEntity, CreateEntityType } from '../types/TypesForCreate';
+import { createCustomerEntity } from '../Prompts/CustomerPrompt'; // Import edilen dosya
+import { createCarPolicyEntity } from '../Prompts/CarPolicyPrompt'; // CarPolicy için import
 
 interface CreateEntityFormProps {
-  entityType: EntityType;
-  onCreate: (entity: Entity) => void;
+  entityType: CreateEntityType;
 }
 
-const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreate }) => {
-  console.log("CreateEntityForm is rendered.")
+const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -29,25 +30,19 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    let newEntity: Entity;
+    let newEntity: CreateEntity | null;
 
     switch (entityType) {
-      case 'Customer':
-        const { name, address, phone, email, password, age, gender } = formData;
-        if (!name || !address || !phone || !email || !password || age <= 18 || !gender) {
-          alert('Lütfen tüm alanları doldurun.');
-          return;
-        }
-        newEntity = { name, address, phone, email, password, age, gender };
+      case 'CreateCustomer':
+        newEntity = createCustomerEntity(formData); // Customer için çağırıyoruz
+        if (!newEntity) return; 
+        createCustomer(newEntity); 
         break;
 
-      case 'CarPolicy':
-        const { name, description, price } = formData;
-        if (!name || !description || price <= 0) {
-          alert('Lütfen tüm alanları doğru doldurun.');
-          return;
-        }
-        
+      case 'CreateCarPolicy':
+        newEntity = createCarPolicyEntity(formData); // CarPolicy için çağırıyoruz
+        if (!newEntity) return; 
+        createCarPolicy(newEntity); 
         break;
 
       default:
@@ -55,8 +50,6 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
         return;
     }
 
-    createCustomer(newEntity);
-    onCreate(newEntity);
     resetForm();
     handleClose();
   };
@@ -67,15 +60,15 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
 
   const renderFormFields = () => {
     switch (entityType) {
-      case 'Customer':
+      case 'CreateCustomer':
         return <UserFormFields formData={formData} onInputChange={handleInputChange} />;
-      case 'CarPolicy':
-        return <ProductFormFields formData={formData} onInputChange={handleInputChange} />;
+      case 'CreateCarPolicy':
+        return <CarPolicyFormFields formData={formData} onInputChange={handleInputChange} />;
       default:
         return null;
     }
   };
-
+  
   return (
     <>
       <Button variant="primary" onClick={handleShow} className="mb-4">

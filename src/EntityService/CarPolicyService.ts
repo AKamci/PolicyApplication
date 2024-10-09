@@ -1,6 +1,14 @@
 // src/services/productService.ts
-import { Entity } from '../types/Types';
-import { promptProductForRequest } from '../Prompts/CarPolicyPrompt';
+import { Entity } from '../types/types';
+import { CreateCarPolicy } from '../types/TypesForCreate';
+
+
+
+export const createCarPolicy = (customer: CreateCarPolicy): void => {
+
+  console.log("Müşteri oluşturuldu:", customer);
+
+};
 
 export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
   console.log("ProductService is rendered.")
@@ -11,7 +19,6 @@ export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
       fetchedProducts = [ /* Tüm ürünler verisi */ ];
       break;
     case 2:
-      const categoryDetails = await promptProductForRequest();
       fetchedProducts = [ /* Yeni ürünler */ ];
       break;
     case 3:

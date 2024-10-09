@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ListGroup, Button, Collapse } from 'react-bootstrap';
 import { userFetchOptions, getUserData } from '../AllFetch/CustomerFetch';
 import { productFetchOptions, getProductData } from '../AllFetch/CarPolicyFetch';
-import { EntityType } from '../types/Types';
+import { EntityType } from '../types/types';
 
 interface SidebarProps {
   selectedEntityType: EntityType | null;

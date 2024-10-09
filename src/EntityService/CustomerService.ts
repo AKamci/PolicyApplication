@@ -1,9 +1,9 @@
 // src/services/userService.ts
 import { Entity } from '../types/types';
-import { promptUserForRequest } from '../Prompts/CustomerPrompt';
-import { Customer } from '../types/Types';
+import { Customer } from '../types/types';
+import { CreateCustomer } from '../types/TypesForCreate';
 
-export const createCustomer = (customer: Customer): void => {
+export const createCustomer = (customer: CreateCustomer): void => {
 
   console.log("Müşteri oluşturuldu:", customer);
 
@@ -18,7 +18,6 @@ export const fetchUsers = async (queryId: number): Promise<Entity[]> => {
       fetchedUsers = [ /* Tüm kullanıcılar verisi */ ];
       break;
     case 2:
-      const categoryDetails = await promptUserForRequest();
       fetchedUsers = [ /* Kullanıcıların köpekleri */ ];
       break;
     case 3:

@@ -1,14 +1,21 @@
-// src/utils/promptUser.ts
-export const promptProductForRequest = async (): Promise<{ name: string; description: string }> => {
-    console.log("ProductPrompt is rendered")
-    const name = prompt("Lütfen kategori adını girin:");
-    const description = prompt("Lütfen kategori açıklamasını girin:");
-  
-    if (!name || !description) {
-      alert("Lütfen tüm alanları doldurun.");
-      return promptProductForRequest(); // Geçersiz giriş durumunda tekrar sor
-    }
-  
-    return { name, description }; // JSON formatında döndür
+// src/Prompts/CarPolicyPrompt.ts
+
+import { CreateCarPolicy } from '../types/TypesForCreate';
+
+export const createCarPolicyEntity = (data: any): CreateCarPolicy | null => {
+  const { policyName, policyDescription, policyType, policyDate, customerId } = data;
+
+  if (!policyName || !policyDescription || !policyType || !policyDate || customerId <= 0) {
+    alert('Lütfen tüm alanları doğru doldurun.');
+    return null; // Hatalı giriş durumunda null döner
+  }
+
+  return {
+    type: 'CreateCarPolicy',
+    policyName,
+    policyDescription,
+    policyType,
+    policyDate,
+    customerId,
   };
-  
+};
