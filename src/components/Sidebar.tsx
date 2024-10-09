@@ -1,10 +1,9 @@
 // src/components/Sidebar.tsx
 import React, { useState } from 'react';
 import { ListGroup, Button, Collapse } from 'react-bootstrap';
-import { userFetchOptions, getUserData } from '../AllFetch/UserFetch';
-import { productFetchOptions, getProductData } from '../AllFetch/ProductFetch';
-import { categoryFetchOptions, getCategoryData } from '../AllFetch/CategoryFetch';
-import { EntityType } from '../types/types';
+import { userFetchOptions, getUserData } from '../AllFetch/CustomerFetch';
+import { productFetchOptions, getProductData } from '../AllFetch/CarPolicyFetch';
+import { EntityType } from '../types/Types';
 
 interface SidebarProps {
   selectedEntityType: EntityType | null;

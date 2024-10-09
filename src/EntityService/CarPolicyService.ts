@@ -1,6 +1,6 @@
 // src/services/productService.ts
-import { Entity } from '../types/types';
-import { promptProductForRequest } from '../Prompts/ProductPrompt';
+import { Entity } from '../types/Types';
+import { promptProductForRequest } from '../Prompts/CarPolicyPrompt';
 
 export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
   console.log("ProductService is rendered.")

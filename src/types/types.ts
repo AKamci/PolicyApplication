@@ -10,16 +10,22 @@ export interface BaseEntity {
 
 export interface Customer extends BaseEntity {
   type: 'Customer';
-  firstName: string;
-  lastName: string;
-  password: string;
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  age : number;
+  gender: string;
 }
 
 export interface CarPolicy extends BaseEntity {
   type: 'CarPolicy';
-  name: string;
-  description: string;
-  price: number;
+  policyName: string;
+  policyDescription: string;
+  policyType: string;
+  policyDate: Date;
+  policyAmount: number;
+  customerId: number;
 }
 
 

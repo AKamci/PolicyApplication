@@ -1,6 +1,6 @@
 // src/AllFetch/ProductFetch.ts
-import { fetchProducts } from '../EntityService/ProductService';
-import { Entity } from '../types/types';
+import { fetchProducts } from '../EntityService/CarPolicyService';
+import { Entity } from '../types/Types';
 
 export const productFetchOptions: string[] = [
   "Ürünleri Getir (1) - Tüm ürünler",

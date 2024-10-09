@@ -1,10 +1,10 @@
 // src/components/CreateEntityForm.tsx
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { Entity, EntityType } from '../types/types';
-import UserFormFields from '../FormFields/UserFormFields';
-import ProductFormFields from '../FormFields/ProductFormFields';
-import CategoryFormFields from '../FormFields/CategoryFormFields';
+import { Entity, EntityType } from '../types/Types';
+import UserFormFields from '../FormFields/CustomerFormFields';
+import ProductFormFields from '../FormFields/CarPolicyFormFields';
+import { createCustomer } from '../EntityService/CustomerService';
 
 interface CreateEntityFormProps {
   entityType: EntityType;
@@ -33,12 +33,12 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
 
     switch (entityType) {
       case 'Customer':
-        const { firstName, lastName, password } = formData;
-        if (!firstName || !lastName || !password) {
+        const { name, address, phone, email, password, age, gender } = formData;
+        if (!name || !address || !phone || !email || !password || age <= 18 || !gender) {
           alert('Lütfen tüm alanları doldurun.');
           return;
         }
-        newEntity = { id: Date.now(), type: 'Customer', firstName, lastName, password };
+        newEntity = { name, address, phone, email, password, age, gender };
         break;
 
       case 'CarPolicy':
@@ -47,7 +47,7 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
           alert('Lütfen tüm alanları doğru doldurun.');
           return;
         }
-        newEntity = { id: Date.now(), type: 'CarPolicy', name, description, price };
+        
         break;
 
       default:
@@ -55,6 +55,7 @@ const CreateEntityForm: React.FC<CreateEntityFormProps> = ({ entityType, onCreat
         return;
     }
 
+    createCustomer(newEntity);
     onCreate(newEntity);
     resetForm();
     handleClose();

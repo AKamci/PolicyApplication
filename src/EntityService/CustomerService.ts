@@ -1,7 +1,13 @@
 // src/services/userService.ts
 import { Entity } from '../types/types';
-import { promptUserForRequest } from '../Prompts/UserPrompt';
+import { promptUserForRequest } from '../Prompts/CustomerPrompt';
+import { Customer } from '../types/Types';
 
+export const createCustomer = (customer: Customer): void => {
+
+  console.log("Müşteri oluşturuldu:", customer);
+
+};
 
 export const fetchUsers = async (queryId: number): Promise<Entity[]> => {
   console.log("UserService is rendered.")

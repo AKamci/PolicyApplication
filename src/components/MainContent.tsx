@@ -1,6 +1,6 @@
 // src/components/MainContent.tsx
 import React from 'react';
-import { EntityType, Entity } from '../types/types';
+import { EntityType, Entity } from '../types/Types';
 import CreateEntityForm from './CreateEntityForm';
 import EntityList from './EntityList';
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
-import { Entity, EntityType } from './types/types';
+import { Entity, EntityType } from './types/Types';
 
 const App: React.FC = () => {
   const [selectedEntityType, setSelectedEntityType] = useState<EntityType | null>(null);
