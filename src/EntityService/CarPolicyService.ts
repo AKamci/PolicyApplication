@@ -1,6 +1,6 @@
 // src/services/productService.ts
 import { Entity } from '../types/types';
-import { CreateCarPolicy } from '../types/TypesForCreate';
+import { CreateCarPolicy, CreateEntity } from '../types/TypesForCreate';
 
 
 
@@ -10,7 +10,7 @@ export const createCarPolicy = (customer: CreateCarPolicy): void => {
 
 };
 
-export const fetchProducts = async (queryId: number): Promise<Entity[]> => {
+export const fetchProducts = async (queryId: number): Promise<Entity[] | Promise<CreateEntity[]>> => {
   console.log("ProductService is rendered.")
   let fetchedProducts: Entity[] = [];
 
