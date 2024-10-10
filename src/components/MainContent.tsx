@@ -1,7 +1,6 @@
 // src/components/MainContent.tsx
 import React from 'react';
 import { EntityType, Entity } from '../types/Types';
-import CreateEntityForm from './CreateEntityForm';
 import EntityList from './EntityList';
 import { CreateEntityType } from '../types/TypesForCreate';
 
@@ -19,10 +18,6 @@ const MainContent: React.FC<MainContentProps> = ({ selectedEntityType, entities,
 
   return (
     <div>
-      {/* selectedEntityType CreateEntityType mi kontrol ediyoruz */}
-      {selectedEntityType && isCreateEntityType(selectedEntityType) && (
-        <CreateEntityForm entityType={selectedEntityType} />
-      )}
       <EntityList
         entities={entities.filter(entity => !selectedEntityType || entity.type === selectedEntityType)}
         setEntities={setEntities}
