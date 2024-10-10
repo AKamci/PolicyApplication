@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ListGroup, Button, Collapse } from 'react-bootstrap';
 import { userFetchOptions, getUserData } from '../AllFetch/CustomerFetch';
 import { productFetchOptions, getProductData } from '../AllFetch/CarPolicyFetch';
-import { EntityType } from '../types/types';
+import { EntityType } from '../types/Types';
 
 interface SidebarProps {
   selectedEntityType: EntityType | null;
@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
           active={selectedEntityType === null}
           onClick={() => setSelectedEntityType(null)}
         >
-          Tüm Entity'ler
+          MENÜ
         </ListGroup.Item>
         {['Customer', 'CarPolicy'].map((type) => (
           <ListGroup.Item
@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedEntityType, setSelectedEntity
               aria-expanded={open}
               className="w-100"
             >
-              Veritabanı İşlemleri
+              İşlemler
             </Button>
             <Collapse in={open}>
               <div id="fetch-options" className="mt-2">

@@ -3,6 +3,7 @@
 import { CreateCustomer } from '../types/TypesForCreate';
 
 export const createCustomerEntity = (data: any): CreateCustomer | null => {
+  console.log("CustomerPrompt is rendered.")
   const { name: customerName, address, phone, email, password, age, gender } = data;
 
   if (!customerName || !address || !phone || !email || !password || age <= 18 || !gender) {

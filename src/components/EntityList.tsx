@@ -10,7 +10,8 @@ interface EntityListProps {
 }
 
 const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
-  console.log("EntityList is rendered.")
+  console.log("EntityList is rendered.");
+  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const [showModal, setShowModal] = useState(false);
@@ -24,7 +25,6 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
 
   const handleEdit = (id: number) => {
     alert(`Edit entity with id: ${id}`);
-    // Edit işlemleri için modal veya başka bir bileşen ekleyebilirsiniz
   };
 
   const handleView = (id: number) => {
@@ -44,9 +44,7 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
   const currentEntities = entities.slice(indexOfFirstEntity, indexOfLastEntity);
   const totalPages = Math.ceil(entities.length / itemsPerPage);
 
-  const handleChangePage = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  const handleChangePage = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const renderPagination = () => (
     <Pagination className="justify-content-center">
@@ -70,6 +68,28 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
     </Pagination>
   );
 
+  const renderEntityDetails = (entity: Entity) => {
+    const details = entity.type === 'Customer'
+      ? (
+        <>
+          <p><strong>İsim:</strong> {entity.address}</p>
+          <p><strong>Soyisim:</strong> {entity.age}</p>
+          <p><strong>Şifre:</strong> {entity.email}</p>
+        </>
+      )
+      : entity.type === 'CarPolicy'
+      ? (
+        <>
+          <p><strong>Ürün Adı:</strong> {entity.id}</p>
+          <p><strong>Açıklama:</strong> {entity.customerId}</p>
+          <p><strong>Fiyat:</strong> {entity.policyAmount} TL</p>
+        </>
+      )
+      : null;
+
+    return details;
+  };
+
   const renderModal = () => (
     <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
@@ -85,29 +105,6 @@ const EntityList: React.FC<EntityListProps> = ({ entities, setEntities }) => {
       </Modal.Footer>
     </Modal>
   );
-
-  const renderEntityDetails = (entity: Entity) => {
-    return (
-      <div>
-        <p><strong>Tür:</strong> {entity.type}</p>
-        <p><strong>ID:</strong> {entity.id}</p>
-        {entity.type === 'Customer' && (
-          <>
-            <p><strong>İsim:</strong> {entity.firstName}</p>
-            <p><strong>Soyisim:</strong> {entity.lastName}</p>
-            <p><strong>Şifre:</strong> {entity.password}</p>
-          </>
-        )}
-        {entity.type === 'CarPolicy' && (
-          <>
-            <p><strong>Ürün Adı:</strong> {entity.name}</p>
-            <p><strong>Açıklama:</strong> {entity.description}</p>
-            <p><strong>Fiyat:</strong> {entity.price} TL</p>
-          </>
-        )}
-      </div>
-    );
-  };
 
   return (
     <div>

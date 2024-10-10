@@ -1,51 +1,69 @@
-// src/components/UserFormFields.tsx
-import React from 'react';
-import { Form } from 'react-bootstrap';
+// src/FormFields/CustomerFormFields.tsx
+import React, { useState } from 'react';
+import { CreateCustomer } from '../types/TypesForCreate';
 
-interface UserFormFieldsProps {
-  formData: {
-    firstName: string;
-    lastName: string;
-    password: string;
-  };
-  onInputChange: (field: string, value: any) => void;
+interface Props {
+    onSubmit: (data: CreateCustomer) => void;
 }
 
-const UserFormFields: React.FC<UserFormFieldsProps> = ({ formData, onInputChange }) => (
-  <>
-    <Form.Group controlId="formFirstName" className="mb-3">
-      <Form.Label>İsim</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="İsim girin"
-        value={formData.firstName || ''}
-        onChange={(e) => onInputChange('firstName', e.target.value)}
-        required
-      />
-    </Form.Group>
+const CustomerFormFields: React.FC<Props> = ({ onSubmit }) => {
+    const [formData, setFormData] = useState<CreateCustomer>({
+        type: 'CreateCustomer',
+        name: '',
+        address: '',
+        phone: '',
+        password: '',
+        email: '',
+        age: 0,
+        gender: '',
+    });
 
-    <Form.Group controlId="formLastName" className="mb-3">
-      <Form.Label>Soyisim</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="Soyisim girin"
-        value={formData.lastName || ''}
-        onChange={(e) => onInputChange('lastName', e.target.value)}
-        required
-      />
-    </Form.Group>
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
-    <Form.Group controlId="formPassword" className="mb-3">
-      <Form.Label>Şifre</Form.Label>
-      <Form.Control
-        type="password"
-        placeholder="Şifre girin"
-        value={formData.password || ''}
-        onChange={(e) => onInputChange('password', e.target.value)}
-        required
-      />
-    </Form.Group>
-  </>
-);
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        onSubmit(formData);
+    };
 
-export default UserFormFields;
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="address">Address</label>
+                <input type="text" className="form-control" id="address" name="address" value={formData.address} onChange={handleChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="phone">Phone</label>
+                <input type="tel" className="form-control" id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input type="password" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" className="form-control" id="email" name="email" value={formData.email} onChange={handleChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="age">Age</label>
+                <input type="number" className="form-control" id="age" name="age" value={formData.age} onChange={handleChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="gender">Gender</label>
+                <input type="text" className="form-control" id="gender" name="gender" value={formData.gender} onChange={handleChange} required />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+    );
+};
+
+export default CustomerFormFields;
