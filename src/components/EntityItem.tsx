@@ -17,17 +17,17 @@ const EntityItem: React.FC<EntityItemProps> = ({ entity, onDelete, onEdit, onVie
       case 'Customer':
         return (
           <>
-            <td>{entity.firstName}</td>
-            <td>{entity.lastName}</td>
-            <td>{entity.password}</td>
+            <td>{entity.id}</td>
+            <td>{entity.name}</td>
+            <td>{entity.email}</td>
           </>
         );
       case 'CarPolicy':
         return (
           <>
-            <td>{entity.name}</td>
-            <td>{entity.description}</td>
-            <td>{`${entity.price} TL`}</td>
+            <td>{entity.id}</td>
+            <td>{entity.customerId}</td>
+            <td>{entity.policyName}</td>
           </>
         );
         

@@ -2,28 +2,34 @@
 import { Entity } from '../types/types';
 import { CreateCarPolicy, CreateEntity } from '../types/TypesForCreate';
 
-
-
 export const createCarPolicy = (customer: CreateCarPolicy): void => {
-
-  console.log("Müşteri oluşturuldu:", customer);
-
+  
+  const jsonData = JSON.stringify(customer, null, 2);
+  console.log("Müşteri oluşturuldu:", jsonData);
 };
 
-export const fetchProducts = async (queryId: number): Promise<Entity[] | Promise<CreateEntity[]>> => {
-  console.log("ProductService is rendered.")
+
+
+
+export const fetchProducts = async (queryId: number, customerData?: CreateCarPolicy): Promise<Entity[] | Promise<CreateEntity[]>> => {
+  console.log("ProductService is rendered.");
   let fetchedProducts: Entity[] = [];
 
   switch (queryId) {
     case 1:
       fetchedProducts = [ /* Tüm ürünler verisi */ ];
       break;
+      
     case 2:
-      fetchedProducts = [ /* Yeni ürünler */ ];
+      
+
+      
       break;
+      
     case 3:
       fetchedProducts = [ /* İndirimli ürünler */ ];
       break;
+    
     // Diğer durumlar...
     default:
       break;

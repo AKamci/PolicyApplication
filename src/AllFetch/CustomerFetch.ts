@@ -1,6 +1,6 @@
 // src/AllFetch/UserFetch.ts
 import { fetchUsers } from '../EntityService/CustomerService';
-import { Entity } from '../types/Types';
+import { Entity } from '../types/types';
 
 export const userFetchOptions: string[] = [
   "Kullanıcıları Getir (1) - Tüm kullanıcılar",

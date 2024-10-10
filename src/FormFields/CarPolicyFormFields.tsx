@@ -1,76 +1,93 @@
-// src/components/ProductFormFields.tsx
-import React from 'react';
-import { Form } from 'react-bootstrap';
+// CreateCarPolicyForm.tsx
+import React, { useState } from 'react';
+import { CreateCarPolicy } from '../types/TypesForCreate';
+import { fetchProducts } from '../EntityService/CarPolicyService'; 
 
-interface ProductFormFieldsProps {
-  formData: {
-    policyName: string;
-    policyDescription: string;
-    policyType: string;
-    policyDate: string; // Tarih için string kullanımı; isterseniz Date türü de kullanabilirsiniz
-    customerId: number; // Müşteri ID'si
+const CreateCarPolicyForm: React.FC = () => {
+  const [formData, setFormData] = useState<CreateCarPolicy>({
+    type: 'CreateCarPolicy',
+    policyName: '',
+    policyDescription: '',
+    policyType: '',
+    policyDate: new Date(),
+    customerId: 0,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === 'policyDate' ? new Date(value) : value,
+    }));
   };
-  onInputChange: (field: string, value: any) => void;
-}
 
-const CarPolicyFormFields: React.FC<ProductFormFieldsProps> = ({ formData, onInputChange }) => (
-  <>
-    <Form.Group controlId="formPolicyName" className="mb-3">
-      <Form.Label>Poliçe Adı</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="Poliçe adı girin"
-        value={formData.policyName || ''}
-        onChange={(e) => onInputChange('policyName', e.target.value)}
-        required
-      />
-    </Form.Group>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    console.log(JSON.stringify(formData, null, 2));
 
-    <Form.Group controlId="formPolicyDescription" className="mb-3">
-      <Form.Label>Açıklama</Form.Label>
-      <Form.Control
-        as="textarea"
-        rows={3}
-        placeholder="Poliçe açıklaması girin"
-        value={formData.policyDescription || ''}
-        onChange={(e) => onInputChange('policyDescription', e.target.value)}
-        required
-      />
-    </Form.Group>
+    await fetchProducts(2, formData);
+  };
 
-    <Form.Group controlId="formPolicyType" className="mb-3">
-      <Form.Label>Poliçe Türü</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="Poliçe türünü girin"
-        value={formData.policyType || ''}
-        onChange={(e) => onInputChange('policyType', e.target.value)}
-        required
-      />
-    </Form.Group>
+  return (
+    
+    <form onSubmit={handleSubmit}>
+      <label>
+        Policy Name:
+        <input
+          type="text"
+          name="policyName"
+          value={formData.policyName}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        Policy Description:
+        <textarea
+          name="policyDescription"
+          value={formData.policyDescription}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        Policy Type:
+        <input
+          type="text"
+          name="policyType"
+          value={formData.policyType}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        Policy Date:
+        <input
+          type="date"
+          name="policyDate"
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        Customer ID:
+        <input
+          type="number"
+          name="customerId"
+          value={formData.customerId}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
-    <Form.Group controlId="formPolicyDate" className="mb-3">
-      <Form.Label>Poliçe Tarihi</Form.Label>
-      <Form.Control
-        type="date"
-        placeholder="Poliçe tarihi seçin"
-        value={formData.policyDate || ''}
-        onChange={(e) => onInputChange('policyDate', e.target.value)}
-        required
-      />
-    </Form.Group>
-
-    <Form.Group controlId="formCustomerId" className="mb-3">
-      <Form.Label>Müşteri ID</Form.Label>
-      <Form.Control
-        type="number"
-        placeholder="Müşteri ID'si girin"
-        value={formData.customerId || 0}
-        onChange={(e) => onInputChange('customerId', Number(e.target.value))}
-        required
-      />
-    </Form.Group>
-  </>
-);
-
-export default CarPolicyFormFields;
+export default CreateCarPolicyForm;
